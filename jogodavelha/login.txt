@@ -1,0 +1,10 @@
+using newtonsoft.json
+
+private async void btlogin(object sender, eventargs e){
+    using (HttpClient client = new Client()){
+        var path = $"https://localhost:{numero}/api/login/{textBox1.Text}/{textBox2.Text}";
+        var response = await client.GetAsync(path);
+        var content = await response.Content.ReadAsStringAsync();
+        Usuario obj = JsonConvert.DeserializeObject<Usuario>(content);
+    }
+}

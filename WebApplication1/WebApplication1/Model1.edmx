@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="oldmansoldgameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="playerId1" Type="int" Nullable="false" />
+          <Property Name="playerId2" Type="int" Nullable="false" />
+          <Property Name="boardLayout" Type="varchar" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatchQueue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="playerId" Type="int" />
+          <Property Name="QueueState" Type="int" />
+          <Property Name="GameMode" Type="int" />
+        </EntityType>
+        <EntityType Name="Usr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nickname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scoreRegular" Type="smallint" Nullable="false" />
+          <Property Name="scoreSuper" Type="smallint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Matches__playerI__1273C1CD">
+          <End Role="Usr" Type="Self.Usr" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="playerId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__playerI__1367E606">
+          <End Role="Usr" Type="Self.Usr" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="playerId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchQueu__playe__1A14E395">
+          <End Role="Usr" Type="Self.Usr" Multiplicity="0..1" />
+          <End Role="MatchQueue" Type="Self.MatchQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MatchQueue">
+              <PropertyRef Name="playerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="oldmansoldgameModelStoreContainer">
+          <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatchQueue" EntityType="Self.MatchQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usr" EntityType="Self.Usr" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Matches__playerI__1273C1CD" Association="Self.FK__Matches__playerI__1273C1CD">
+            <End Role="Usr" EntitySet="Usr" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__playerI__1367E606" Association="Self.FK__Matches__playerI__1367E606">
+            <End Role="Usr" EntitySet="Usr" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchQueu__playe__1A14E395" Association="Self.FK__MatchQueu__playe__1A14E395">
+            <End Role="Usr" EntitySet="Usr" />
+            <End Role="MatchQueue" EntitySet="MatchQueue" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="oldmansoldgameModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="playerId1" Type="Int32" Nullable="false" />
+          <Property Name="playerId2" Type="Int32" Nullable="false" />
+          <Property Name="boardLayout" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usr" Relationship="Self.FK__Matches__playerI__1273C1CD" FromRole="Matches" ToRole="Usr" />
+          <NavigationProperty Name="Usr1" Relationship="Self.FK__Matches__playerI__1367E606" FromRole="Matches" ToRole="Usr" />
+        </EntityType>
+        <EntityType Name="MatchQueue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="playerId" Type="Int32" />
+          <Property Name="QueueState" Type="Int32" />
+          <Property Name="GameMode" Type="Int32" />
+          <NavigationProperty Name="Usr" Relationship="Self.FK__MatchQueu__playe__1A14E395" FromRole="MatchQueue" ToRole="Usr" />
+        </EntityType>
+        <EntityType Name="Usr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scoreRegular" Type="Int16" Nullable="false" />
+          <Property Name="scoreSuper" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK__Matches__playerI__1273C1CD" FromRole="Usr" ToRole="Matches" />
+          <NavigationProperty Name="Matches1" Relationship="Self.FK__Matches__playerI__1367E606" FromRole="Usr" ToRole="Matches" />
+          <NavigationProperty Name="MatchQueue" Relationship="Self.FK__MatchQueu__playe__1A14E395" FromRole="Usr" ToRole="MatchQueue" />
+        </EntityType>
+        <Association Name="FK__Matches__playerI__1273C1CD">
+          <End Role="Usr" Type="Self.Usr" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="playerId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__playerI__1367E606">
+          <End Role="Usr" Type="Self.Usr" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="playerId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchQueu__playe__1A14E395">
+          <End Role="Usr" Type="Self.Usr" Multiplicity="0..1" />
+          <End Role="MatchQueue" Type="Self.MatchQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MatchQueue">
+              <PropertyRef Name="playerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="oldmansoldgameEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Matches" EntityType="Self.Matches" />
+          <EntitySet Name="MatchQueue" EntityType="Self.MatchQueue" />
+          <EntitySet Name="Usr" EntityType="Self.Usr" />
+          <AssociationSet Name="FK__Matches__playerI__1273C1CD" Association="Self.FK__Matches__playerI__1273C1CD">
+            <End Role="Usr" EntitySet="Usr" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__playerI__1367E606" Association="Self.FK__Matches__playerI__1367E606">
+            <End Role="Usr" EntitySet="Usr" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchQueu__playe__1A14E395" Association="Self.FK__MatchQueu__playe__1A14E395">
+            <End Role="Usr" EntitySet="Usr" />
+            <End Role="MatchQueue" EntitySet="MatchQueue" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="oldmansoldgameModelStoreContainer" CdmEntityContainer="oldmansoldgameEntities">
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="oldmansoldgameModel.Matches">
+              <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="playerId1" ColumnName="playerId1" />
+                <ScalarProperty Name="playerId2" ColumnName="playerId2" />
+                <ScalarProperty Name="boardLayout" ColumnName="boardLayout" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatchQueue">
+            <EntityTypeMapping TypeName="oldmansoldgameModel.MatchQueue">
+              <MappingFragment StoreEntitySet="MatchQueue">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="playerId" ColumnName="playerId" />
+                <ScalarProperty Name="QueueState" ColumnName="QueueState" />
+                <ScalarProperty Name="GameMode" ColumnName="GameMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usr">
+            <EntityTypeMapping TypeName="oldmansoldgameModel.Usr">
+              <MappingFragment StoreEntitySet="Usr">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="scoreRegular" ColumnName="scoreRegular" />
+                <ScalarProperty Name="scoreSuper" ColumnName="scoreSuper" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
