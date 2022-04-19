@@ -17,9 +17,15 @@ namespace WebApplication1
             config.Routes.MapHttpRoute(
                 name: "Login Route",
                 routeTemplate: "api/login/{nickname}/{password}",
-                defaults: new 
-                { id = RouteParameter.Optional }
+                new 
+                { 
+                    controller = "Usr",
+                    nickname = string.Empty,
+                    password = string.Empty
+                }
             );
+
+
         }
     }
 }
