@@ -16,5 +16,16 @@ namespace jogodavelha
         {
             InitializeComponent();
         }
+
+        private void bt_regular_Click(object sender, EventArgs e)
+        {
+            FormReg formReg = new FormReg() { TopLevel = false };
+            Form1 form1 = (Form1)Form1.ActiveForm;
+            formReg.Parent = form1.panel3;
+            formReg.Show();
+            bt_regular.Enabled = false;
+            form1.menu_Disable();
+            this.Hide();
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace jogodavelha
 {
     public partial class Form1 : Form
     {
+        //public static Form1 Instance = (Form1)Form1.ActiveForm;
+
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +35,16 @@ namespace jogodavelha
 
             this.panel3.Controls.Add(form2);
             form2.Show();
+        }
+
+        public void menu_Disable()
+        {
+            this.bt_off.Enabled = false;
+            this.bt_off.BackColor = System.Drawing.ColorTranslator.FromHtml("#726E97");
+            this.bt_online.Enabled = false;
+            this.bt_online.BackColor = System.Drawing.ColorTranslator.FromHtml("#726E97");
+            this.bt_other.Enabled = false;
+            this.bt_other.BackColor = System.Drawing.ColorTranslator.FromHtml("#726E97");
         }
     }
 }

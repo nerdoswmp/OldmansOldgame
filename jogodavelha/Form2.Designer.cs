@@ -45,6 +45,7 @@
             this.bt_regular.TabIndex = 6;
             this.bt_regular.Text = "Regular";
             this.bt_regular.UseVisualStyleBackColor = false;
+            this.bt_regular.Click += new System.EventHandler(this.bt_regular_Click);
             // 
             // bt_super
             // 
